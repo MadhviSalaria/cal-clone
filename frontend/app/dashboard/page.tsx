@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/events")
+      .get("https://cal-clone-pkww.onrender.com/events")
       .then((res) => {
         setEvents(res.data);
         setLoading(false);

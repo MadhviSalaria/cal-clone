@@ -15,7 +15,7 @@ export default function CreateEvent() {
     }
 
     try {
-      await axios.post("http://localhost:5000/events", {
+      await axios.post("https://cal-clone-pkww.onrender.com/events", {
         title,
         description,
         duration,
