@@ -1,4 +1,5 @@
 "use client";
+
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
@@ -8,13 +9,15 @@ export default function BookingPage() {
   const slug = (params?.slug as string) || "";
   const router = useRouter();
 
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [time, setTime] = useState<string>("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
 
-  const generateSlots = (): string[] => {
-    const times: string[] = [];
+  const BASE_URL = "https://cal-clone-pkww.onrender.com";
+
+  const generateSlots = () => {
+    const times = [];
     let hour = 10;
 
     while (hour < 13) {
@@ -27,9 +30,10 @@ export default function BookingPage() {
 
   const slots = generateSlots();
 
-  const formatTime = (time: string): string => {
+  const formatTime = (time: string) => {
     const [hour, minute] = time.split(":");
     const hourNum = parseInt(hour);
+
     const ampm = hourNum >= 12 ? "PM" : "AM";
     const formattedHour = hourNum % 12 || 12;
 
@@ -43,11 +47,11 @@ export default function BookingPage() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/bookings", {
+      const res = await axios.post(`${BASE_URL}/bookings`, {
         name,
         email,
         slug,
-        date,
+        date: new Date(date).toISOString().split("T")[0], // ✅ FIX DATE
         time,
       });
 
@@ -58,7 +62,8 @@ export default function BookingPage() {
       } else {
         alert(res.data);
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       alert("Error occurred while booking ");
     }
   };
@@ -79,7 +84,7 @@ export default function BookingPage() {
         {/* Name */}
         <input
           value={name}
-          className="border border-gray-300 p-3 w-full mb-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          className="border border-gray-300 p-3 w-full mb-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
           placeholder="Your Name"
           onChange={(e) => setName(e.target.value)}
         />
@@ -87,7 +92,7 @@ export default function BookingPage() {
         {/* Email */}
         <input
           value={email}
-          className="border border-gray-300 p-3 w-full mb-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          className="border border-gray-300 p-3 w-full mb-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
           placeholder="Your Email"
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -96,7 +101,7 @@ export default function BookingPage() {
         <input
           type="date"
           value={date}
-          className="border border-gray-300 p-3 w-full mb-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          className="border border-gray-300 p-3 w-full mb-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
           onChange={(e) => setDate(e.target.value)}
         />
 
@@ -111,9 +116,9 @@ export default function BookingPage() {
               <button
                 key={slot}
                 onClick={() => setTime(slot)}
-                className={`p-2 rounded-xl text-sm border transition-all duration-200 ${
+                className={`p-2 rounded-xl text-sm border ${
                   time === slot
-                    ? "bg-indigo-600 text-white shadow-md scale-105"
+                    ? "bg-indigo-600 text-white"
                     : "bg-white hover:bg-indigo-50 border-gray-300"
                 }`}
               >
@@ -126,7 +131,7 @@ export default function BookingPage() {
         {/* Button */}
         <button
           onClick={handleBooking}
-          className="bg-indigo-600 text-white py-3 rounded-xl w-full hover:bg-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg"
+          className="bg-indigo-600 text-white py-3 rounded-xl w-full hover:bg-indigo-700"
         >
           Confirm Booking
         </button>
