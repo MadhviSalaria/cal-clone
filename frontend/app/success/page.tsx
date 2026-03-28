@@ -1,15 +1,14 @@
 "use client";
 
-export default function SuccessPage() {
-  const params =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search)
-      : null;
+import { useSearchParams } from "next/navigation";
 
-  const name = params?.get("name") || "";
-  const email = params?.get("email") || "";
-  const date = params?.get("date") || "";
-  const time = params?.get("time") || "";
+export default function SuccessPage() {
+  const params = useSearchParams();
+
+  const name = params.get("name") || "";
+  const email = params.get("email") || "";
+  const date = params.get("date") || "";
+  const time = params.get("time") || "";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-white px-4">
@@ -20,10 +19,12 @@ export default function SuccessPage() {
           Booking Confirmed 
         </h2>
 
-        <p><strong>Name:</strong> {name}</p>
-        <p><strong>Email:</strong> {email}</p>
-        <p><strong>Date:</strong> {date}</p>
-        <p><strong>Time:</strong> {time}</p>
+        <div className="text-left mt-4 space-y-2">
+          <p><strong>Name:</strong> {name}</p>
+          <p><strong>Email:</strong> {email}</p>
+          <p><strong>Date:</strong> {date}</p>
+          <p><strong>Time:</strong> {time}</p>
+        </div>
 
       </div>
     </div>
