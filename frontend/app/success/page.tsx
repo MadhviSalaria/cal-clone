@@ -1,18 +1,15 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
-import { useSearchParams } from "next/navigation";
-
 export default function SuccessPage() {
-  const params = useSearchParams();
+  const params =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search)
+      : null;
 
-  if (!params) return null;
-
-  const name = params.get("name") || "";
-  const email = params.get("email") || "";
-  const date = params.get("date") || "";
-  const time = params.get("time") || "";
+  const name = params?.get("name") || "";
+  const email = params?.get("email") || "";
+  const date = params?.get("date") || "";
+  const time = params?.get("time") || "";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-white px-4">
