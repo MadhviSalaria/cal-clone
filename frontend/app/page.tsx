@@ -14,7 +14,7 @@ export default function Home() {
         </p>
 
         <Link href="/create-event">
-          <button className="bg-black text-white px-6 py-2 rounded-lg">
+          <button className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
             Create Event
           </button>
         </Link>

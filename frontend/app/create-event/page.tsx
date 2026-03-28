@@ -49,7 +49,7 @@ export default function CreateEvent() {
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="border border-gray-300 p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+          className="border border-gray-300 p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
         {/* Description */}
@@ -58,7 +58,7 @@ export default function CreateEvent() {
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="border border-gray-300 p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+          className="border border-gray-300 p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
         {/* Duration */}
@@ -67,7 +67,7 @@ export default function CreateEvent() {
           placeholder="Duration (minutes)"
           value={duration}
           onChange={(e) => setDuration(e.target.value)}
-          className="border border-gray-300 p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+          className="border border-gray-300 p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
         {/* Slug */}
@@ -76,13 +76,13 @@ export default function CreateEvent() {
           placeholder="Slug (unique URL)"
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
-          className="border border-gray-300 p-3 w-full mb-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+          className="border border-gray-300 p-3 w-full mb-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
         {/* Button */}
         <button
           onClick={handleSubmit}
-          className="bg-black text-white py-3 w-full rounded-lg hover:bg-gray-800 transition"
+          className="bg-indigo-600 text-white py-3 w-full rounded-lg hover:bg-indigo-700 transition"
         >
           Create & Book
         </button>
