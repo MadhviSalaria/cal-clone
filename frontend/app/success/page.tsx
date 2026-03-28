@@ -7,6 +7,8 @@ import { useSearchParams } from "next/navigation";
 export default function SuccessPage() {
   const params = useSearchParams();
 
+  if (!params) return null;
+
   const name = params.get("name") || "";
   const email = params.get("email") || "";
   const date = params.get("date") || "";
