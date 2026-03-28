@@ -1,6 +1,8 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 interface EventType {
   id: number;
@@ -31,19 +33,37 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-gray-100 px-4 py-10">
       
-      <div className="max-w-3xl mx-auto">
-        
-        <h1 className="text-4xl font-bold mb-8 text-gray-900">
-          My Events
-        </h1>
+      <div className="max-w-4xl mx-auto">
+
+        {/* HEADER */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900">
+            My Events
+          </h1>
+
+          {/*  Create Event Button */}
+          <Link
+            href="/create-event"
+            className="bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition"
+          >
+            + Create Event
+          </Link>
+        </div>
 
         {/* Loading */}
         {loading ? (
           <p className="text-center text-gray-500">Loading...</p>
         ) : events.length === 0 ? (
-          <p className="text-center text-gray-500">
-            No events found
-          </p>
+          <div className="text-center text-gray-500">
+            <p>No events found </p>
+
+            <Link
+              href="/create-event"
+              className="inline-block mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
+            >
+              Create Your First Event
+            </Link>
+          </div>
         ) : (
           <div className="space-y-5">
             {events.map((event) => (
@@ -66,18 +86,17 @@ export default function Dashboard() {
                   Duration: {event.duration} mins
                 </p>
 
-                {/* Button */}
-                <a
+                {/*  Button (fixed with Link) */}
+                <Link
                   href={`/book/${event.slug}`}
                   className="inline-block mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm shadow hover:shadow-md"
                 >
                   Book Now →
-                </a>
+                </Link>
               </div>
             ))}
           </div>
         )}
-
       </div>
     </div>
   );
